@@ -35,18 +35,18 @@ class NationalPatientId {
     $parity = $number.length % 2;
 
     $sum = 0;
-    $number.each_with_index do |digit,index|
-      digit = digit * 2 if index%2==parity
-      digit = digit - 9 if digit > 9
-      sum = sum + digit
-    end
+    //$number.each_with_index do |digit,index|
+    //  digit = digit * 2 if index%2==parity
+    //  digit = digit - 9 if digit > 9
+    //  sum = sum + digit
+    //end
 
     $checkdigit = 0;
     $checkdigit = $checkdigit +1 while (($sum+($checkdigit))%10)!=0
-    $checkdigit
+    return $checkdigit;
   }
 
-  # Convert a Base 10 <tt>number</tt> to the specified <tt>base</tt>
+  // Convert a Base 10 <tt>number</tt> to the specified <tt>base</tt>
   function convert($num){
     $results = '';
     $quotient = $num.to_i;
@@ -58,7 +58,7 @@ class NationalPatientId {
     return $results;
   }
 
-   When converting to string, print a hyphen after the third character
+   //When converting to string, print a hyphen after the third character
   function to_s() {
     //"#{@value.slice(0,3)}#{@@separator}#{@value.slice(3,@value.length)}"
   }
@@ -71,15 +71,16 @@ class NationalPatientId {
     //num.to_s.gsub(@@separator, '').split('').reverse.each_with_index do |n, i|
     //  decimal += @@reverse_map[n] * (from_base ** i)
     //end
-    $decimal
+    return $decimal;
   }
 
   //Checks if <tt>num<tt> has a correct check digit
   public static function valid($num) {
-    $core_id = num / 10
-    $check_digit = $num % 10 # last digit
+    $core_id = $num / 10;
+    $check_digit = $num % 10; # last digit
 
-    check_digit == NationalPatientId.check_digit(core_id)
+    $check_digit == self::check_digit($core_id)
+    return $check_digit;
   }
 
 }
