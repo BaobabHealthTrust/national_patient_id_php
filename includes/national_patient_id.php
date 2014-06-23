@@ -1,15 +1,30 @@
 <?php
 
-  function check_digit($number){
-    settype($number, 'string');
-		$sumTable = array(array(0,1,2,3,4,5,6,7,8,9),array(0,2,4,6,8,1,3,5,7,9));
-		$sum = 0;
-		$flip = 0;
-		for ($i = strlen($number) - 1; $i >= 0; $i--) {
-				$sum += $sumTable[$flip++ & 0x1][$number[$i]];
-		}
+  function check_digit($num_param){
+    $num = strval($num_param);
+    $number = str_split($num);
+    $numbers = array_map('intval',$number);
+        
+    $parity = count($numbers) % 2;
 
-		return $sum % 10 === 0;
+    $sum = 0;
+   
+    foreach ($numbers as $key => $value){
+      if ($key%2==$parity) {
+      $value = $value * 2 ;
+      }
+      if ($value > 9){
+      $value = $value - 9;
+      }
+ 
+      $sum = $sum + $value;
+    }
+
+    $checkdigit = 0;
+    while ((($sum+($checkdigit))%10)!=0) {
+       $checkdigit = $checkdigit +1; 
+    }
+    return $checkdigit;
   
   }
 
@@ -22,7 +37,7 @@
 						             'X' => 28,'Y' => 29);
 
 			 $number = array_reverse(str_split(str_replace('-','',$num)));
-			 $number2;
+			 $number2 = 0;
 				
 			 foreach ($number as $key => $value){
 			 		$number2 +=  $reverse_map[$value] * (pow($from_base,$key));
@@ -33,16 +48,9 @@
 
   # Checks if <tt>num<tt> has a correct check digit
   function is_valid($num){
-    $core_id = $num / 10;
+    $core_id = (int)($num / 10);
     $check_digit = $num % 10; # last digit
-
-    if ($check_digit == check_digit($core_id)){
-       return 1;  
-    }
-    else
-    { 
-      return 0;
-    }
+    return ($check_digit == check_digit($core_id));
   }
 
 ?>
