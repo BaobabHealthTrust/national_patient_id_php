@@ -50,7 +50,9 @@
   function is_valid($num){
     $core_id = (int)($num / 10);
     $check_digit = $num % 10;
-    return ($check_digit == check_digit($core_id));
+
+    $check_validity = ($check_digit == check_digit($core_id) ? true : false);
+    return $check_validity;
   }
 
 ?>
