@@ -1,5 +1,5 @@
 <?php
- 
+ error_reporting(E_ALL ^ E_NOTICE);
  if (isset($_POST['check_national_id'])) {
    require_once('includes/national_patient_id.php');
    $national_id = $_POST['national_id'];
