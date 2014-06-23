@@ -46,10 +46,10 @@
 			 return $number2;
   }
 
-  # Checks if <tt>num<tt> has a correct check digit
+ 
   function is_valid($num){
     $core_id = (int)($num / 10);
-    $check_digit = $num % 10; # last digit
+    $check_digit = $num % 10;
     return ($check_digit == check_digit($core_id));
   }
 
