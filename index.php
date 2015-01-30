@@ -8,13 +8,14 @@
 <h2>National Patient ID Validator</h2>
 <?php
  error_reporting(E_ALL ^ E_NOTICE);
-
- if (isset($_POST['check_national_id'])) {
+ 
+  $national_id = str_replace('-','',$_POST['national_id']);
+  
+ if (isset($_POST['check_national_id']) && strlen($national_id) == 6){
   if ($_POST['national_id']) {
    require_once('includes/national_patient_id.php');
-   $national_id = str_replace('-','',$_POST['national_id']);
    $national_id_decimal = to_decimal($national_id);
-  
+   
    if (is_valid($national_id_decimal)){
      
     echo "<p style='color:green'>" . $national_id . " is a valid national id.</p>" ;
